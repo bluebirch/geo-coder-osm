@@ -50,6 +50,12 @@ sub new {
         $self->ua->default_header(accept_encoding => 'gzip,deflate');
     }
 
+    unless ($self->{'accept-language'}) {
+        $self->{'accept-language'} = 'en';
+    }
+
+    say STDERR "what we have: ", $self;
+
     return $self;
 }
 
@@ -80,7 +86,7 @@ sub geocode {
         q                 => $location,
         format            => 'json',
         addressdetails    => 1,
-        'accept-language' => 'en',
+        'accept-language' => $self->{'accept-language'},
         %params,
     );
 
@@ -111,7 +117,7 @@ sub reverse_geocode {
         lon               => $lon,
         format            => 'json',
         addressdetails    => 1,
-        'accept-language' => 'en',
+        'accept-language' => $self->{'accept-language'},
         %params,
     );
 
