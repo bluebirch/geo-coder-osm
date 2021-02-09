@@ -54,8 +54,6 @@ sub new {
         $self->{'accept-language'} = 'en';
     }
 
-    say STDERR "what we have: ", $self;
-
     return $self;
 }
 
